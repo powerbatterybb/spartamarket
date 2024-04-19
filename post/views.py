@@ -34,7 +34,7 @@ def post_detail(request, pk):
 @login_required
 def post_register(request):
     if request.method == 'POST':
-        form = PostForm(request.POST)
+        form = PostForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('post:index')
