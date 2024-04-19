@@ -155,7 +155,7 @@
     <div class="box">
         <h1>게시글 수정</h1>
         <br>
-        <form method="post" class="form-control">
+        <form method="post" class="form-control" enctype="multipart/form-data">
             <br>
             {% csrf_token %}
             {{ form.as_p }}

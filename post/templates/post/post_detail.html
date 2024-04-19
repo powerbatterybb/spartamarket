@@ -143,7 +143,11 @@
                                 <font size="7em">{{post.title}}</font>
                             </text></p>
                         <p class="card-text">{{post.contents}}</p>
-                        <img src="{{post.image.url}}">
+                        
+                        {% if post.image %}
+                            <img src="{{post.image.url}}">
+                        {% endif %}
+                        
                         <p class="card-text">작성일자: {{post.create_date}}</p>
 
                         <br>
