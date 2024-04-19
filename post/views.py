@@ -3,7 +3,7 @@ from post.forms import PostForm, CommentForm
 from django.shortcuts import redirect
 from .forms import SignUpForm
 from .models import Post, Comment
-
+from django.contrib.auth.decorators import login_required
 
 def index(request):
     posts = Post.objects.all()
@@ -31,7 +31,7 @@ def post_detail(request, pk):
         form = CommentForm()
     return render(request, 'post/post_detail.html', {'post': post, 'form': form, 'comments': comments})
 
-
+@login_required
 def post_register(request):
     if request.method == 'POST':
         form = PostForm(request.POST)
@@ -42,7 +42,7 @@ def post_register(request):
         form = PostForm()
     return render(request, 'post/post_register.html', {'form': form})
 
-
+@login_required
 def post_edit(request, pk):
     post = get_object_or_404(Post, pk=pk)
     if request.method == 'POST':
@@ -54,13 +54,13 @@ def post_edit(request, pk):
         form = PostForm(instance=post)
     return render(request, 'post/post_edit.html', {'form': form})
 
-
+@login_required
 def post_delete(request, pk):
     post = get_object_or_404(Post, pk=pk)
     post.delete()
     return redirect('post:index')
 
-
+@login_required
 def comment_delete(request, pk, comment_id):
     comment = get_object_or_404(Comment, pk=comment_id)
     if request.method == 'POST':
